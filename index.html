@@ -15,29 +15,29 @@
 
         <div class="col-sm-2"></div>
 
-        <ul class="list-group col-sm-2">
+        <ul class="list-group col-sm-2 city-list">
             <div class="input-group mb-1">
-                <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)">
+                <input type="text" class="form-control user-input">
                 <div class="input-group-append">
-                  <span class="input-group-text">Search</span>
+                  <span class="input-group-text searchbar">Search</span>
                 </div>
             </div>
-            <li class="list-group-item">Nairobi</li>
+            <!-- <li class="list-group-item">Nairobi</li>
             <li class="list-group-item">Caracas</li>
             <li class="list-group-item">Beijing</li>
             <li class="list-group-item">New York</li>
-            <li class="list-group-item">London</li>
+            <li class="list-group-item">London</li> -->
         </ul>
 
         <!-- <div class="col-sm-1"></div> -->
 
         <div class="card col-sm-6" style="width: 18rem;">
             <div class="card-body">
-              <h5 class="card-title">City</h5>
-              <p class="card-text">Temperature:</p>
-              <p class="card-text">Humidity:</p>
-              <p class="card-text">Windspeed:</p>
-              <p class="card-text">UV Index:</p>
+              <h5 class="card-title city">City</h5>
+              <p class="card-text temp">Temperature:</p>
+              <p class="card-text humidity">Humidity:</p>
+              <p class="card-text wind">Windspeed:</p>
+              <p class="card-text UV">UV Index:</p>
             </div>
         </div>
     
@@ -90,5 +90,7 @@
 
     </div>
     
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
