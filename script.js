@@ -30,11 +30,16 @@ function forecast(){
         url: forecastURL,
         method: "GET"
       }).then(function(response) {
-          $(".date-1").text(response.list[2].dt_txt);
-          $(".date-2").text(response.list[10].dt_txt);
-          $(".date-3").text(response.list[18].dt_txt);
-          $(".date-4").text(response.list[26].dt_txt);
-          $(".date-5").text(response.list[34].dt_txt);
+          var day1 = JSON.stringify(response.list[2].dt_txt)
+          $(".date-1").text(day1.substring(0,11));
+          var day2 = JSON.stringify(response.list[10].dt_txt)
+          $(".date-2").text(day2.substring(0,11));
+          var day3 = JSON.stringify(response.list[18].dt_txt)
+          $(".date-3").text(day3.substring(0,11));
+          var day4 = JSON.stringify(response.list[26].dt_txt)
+          $(".date-4").text(day4.substring(0,11));
+          var day5 = JSON.stringify(response.list[34].dt_txt)
+          $(".date-5").text(day5.substring(0,11));
           $(".f-temp-1").text(response.list[2].main.temp);
           $(".f-temp-2").text(response.list[10].main.temp);
           $(".f-temp-3").text(response.list[18].main.temp);
