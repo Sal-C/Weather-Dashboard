@@ -1,31 +1,13 @@
-
+var city;
 
 
 $(".searchbar").on("click", function() {
-    var city = document.querySelector(".user-input").value;
-    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=166a433c57516f51dfab1f7edaed8413";
-    console.log(city);
-    $.ajax({
-        url: queryURL,
-        method: "GET"
-      }).then(function(response) {
-          $(".city").text(response.name);
-          $(".temp").text("Temperature: " + response.main.temp);
-          $(".humidity").text("Humidity: " + response.main.humidity);
-          $(".wind").text("Wind Speed: " + response.wind.speed);
-          $(".UV").text("UV: " + response.weather.icon);
-          var newLi = $("<li>").addClass("list-group-item").text(response.name);
-          newLi.addClass("list-group-item").text(response.name);
-          $(".city-list").append(newLi)
-          forecast()
-    
-    })
+    city = document.querySelector(".user-input").value;
+    cardbody()
 })
 
 function forecast(){
-    var city1 = document.querySelector(".user-input").value;
-    var forecastURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + city1 + "&units=imperial&appid=166a433c57516f51dfab1f7edaed8413"
-    console.log(city1 + " and test");
+    var forecastURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=imperial&appid=166a433c57516f51dfab1f7edaed8413"
     $.ajax({
         url: forecastURL,
         method: "GET"
@@ -40,19 +22,63 @@ function forecast(){
           $(".date-4").text(day4.substring(0,11));
           var day5 = JSON.stringify(response.list[34].dt_txt)
           $(".date-5").text(day5.substring(0,11));
-          $(".f-temp-1").text(response.list[2].main.temp);
-          $(".f-temp-2").text(response.list[10].main.temp);
-          $(".f-temp-3").text(response.list[18].main.temp);
-          $(".f-temp-4").text(response.list[26].main.temp);
-          $(".f-temp-5").text(response.list[34].main.temp);
-          $(".f-hum-1").text(response.list[2].main.humidity);
-          $(".f-hum-2").text(response.list[10].main.humidity);
-          $(".f-hum-3").text(response.list[18].main.humidity);
-          $(".f-hum-4").text(response.list[26].main.humidity);
-          $(".f-hum-5").text(response.list[34].main.humidity);
-          //response.list[i].weather[{main[1],icon[3]
+          $(".f-temp-1").text("Temp: " + response.list[2].main.temp + "°F");
+          $(".f-temp-2").text("Temp: " + response.list[10].main.temp + "°F");
+          $(".f-temp-3").text("Temp: " + response.list[18].main.temp + "°F");
+          $(".f-temp-4").text("Temp: " + response.list[26].main.temp + "°F");
+          $(".f-temp-5").text("Temp: " + response.list[34].main.temp + "°F");
+          $(".f-hum-1").text("Humidity: " + response.list[2].main.humidity + "%");
+          $(".f-hum-2").text("Humidity: " + response.list[10].main.humidity + "%");
+          $(".f-hum-3").text("Humidity: " + response.list[18].main.humidity + "%");
+          $(".f-hum-4").text("Humidity: " + response.list[26].main.humidity + "%");
+          $(".f-hum-5").text("Humidity: " + response.list[34].main.humidity + "%");
+
+          //Icons
+          $("#icon1").attr('src', "http://openweathermap.org/img/w/" + response.list[2].weather[0].icon + ".png");
+          $("#icon2").attr('src', "http://openweathermap.org/img/w/" + response.list[10].weather[0].icon + ".png");
+          $("#icon3").attr('src', "http://openweathermap.org/img/w/" + response.list[18].weather[0].icon + ".png");
+          $("#icon4").attr('src', "http://openweathermap.org/img/w/" + response.list[26].weather[0].icon + ".png");
+          $("#icon5").attr('src', "http://openweathermap.org/img/w/" + response.list[34].weather[0].icon + ".png");
+    })
+}
+
+function cardbody() {
+    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=166a433c57516f51dfab1f7edaed8413";
+    console.log(city);
+    $.ajax({
+        url: queryURL,
+        method: "GET"
+      }).then(function(response) {
+          //new li
+          var newLi = $("<li>").addClass("list-group-item").attr("onclick", "lulalivre()").text(response.name);
+          //newLi.addClass("list-group-item").text(response.name);
+          $(".city-list").append(newLi)
+          
+          $(".city").text(response.name);
+          $(".temp").text("Temperature: " + response.main.temp + "°F");
+          $(".humidity").text("Humidity: " + response.main.humidity + "%");
+          $(".wind").text("Wind Speed: " + response.wind.speed + "MPH");
+          
+          //uv
+          var latitude = response.coord.lat;
+          var longitude = response.coord.lon;
+          uvURL = "http://api.openweathermap.org/data/2.5/uvi?appid=166a433c57516f51dfab1f7edaed8413&lat=" + latitude + "&lon=" + longitude;
+          $.ajax({
+              url: uvURL,
+              method: "GET"
+          }).then(function(uv){
+            $(".UV").text("UV: " + uv.value);
+            forecast()
+          })
+          
+          
     
     })
-
+    
 }
+
+function lulalivre(){
+    alert($(this))
+}
+
 
