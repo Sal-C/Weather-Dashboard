@@ -3,20 +3,19 @@ var city;
 
 $(".searchbar").on("click", function() {
     city = document.querySelector(".user-input").value;
+    //new li
+    var newLi = $("<li>").addClass("list-group-item").attr("onclick", "historySearch(this.id)").text(city).css("text-transform", "capitalize");
+    newLi.attr("id", city);
+    $(".city-list").append(newLi);
     cardbody()
 })
 
 function cardbody() {
     var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=166a433c57516f51dfab1f7edaed8413";
-    console.log(city);
     $.ajax({
         url: queryURL,
         method: "GET"
-      }).then(function(response) {
-          //new li
-          var newLi = $("<li>").addClass("list-group-item cityValue").text(response.name);
-          $(".city-list").append(newLi)
-          
+      }).then(function(response) { 
           $(".city").text(response.name);
           $(".temp").text("Temperature: " + response.main.temp + "°F");
           $(".humidity").text("Humidity: " + response.main.humidity + "%");
@@ -86,12 +85,10 @@ function forecast(){
     })
 }
 
-// function historySearch(){
-//     alert("hi")
-// }
+ function historySearch(clicked_id){
+     city = clicked_id;
+     cardbody()
+ }
 
-// $(".cityValue").click(function(){
-//     alert(this.val())
-// })
 
 
