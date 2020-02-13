@@ -3,11 +3,15 @@ var city;
 
 $(".searchbar").on("click", function() {
     city = document.querySelector(".user-input").value;
-    //new li
-    var newLi = $("<li>").addClass("list-group-item").attr("onclick", "historySearch(this.id)").text(city).css("text-transform", "capitalize");
-    newLi.attr("id", city);
-    $(".city-list").append(newLi);
-    cardbody()
+    //validate user input
+    if (city === ""){
+        alert("Choose a city!")
+    } else {
+        var newLi = $("<li>").addClass("list-group-item").attr("onclick", "historySearch(this.id)").text(city).css("text-transform", "capitalize");
+        newLi.attr("id", city);
+        $(".city-list").append(newLi);
+        cardbody()
+    }
 })
 
 function cardbody() {
